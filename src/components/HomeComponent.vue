@@ -4,13 +4,13 @@
       <img src="../assets/logo.png" alt="Vuetify.js">
       <v-spacer></v-spacer>
       <v-row class="">
-        <v-col cols="auto"> <v-btn :to="{name:'Popular'}" text flat>Match Articles</v-btn></v-col>
-        <v-col cols="auto"> <v-btn :to="{name:'Popular'}" text flat>About us</v-btn></v-col>
-        <v-col cols="auto"><v-btn :to="{name:'Popular'}" text flat>Blog</v-btn></v-col>
-        <v-col cols="auto"><v-btn :to="{name:'Popular'}" text flat>Popular Authors</v-btn></v-col>
+        <v-col cols="auto"> <v-btn :to="{name:'Popular'}" text>Match Articles</v-btn></v-col>
+        <v-col cols="auto"> <v-btn :to="{name:'Popular'}" text>About us</v-btn></v-col>
+        <v-col cols="auto"><v-btn :to="{name:'Popular'}" text>Blog</v-btn></v-col>
+        <v-col cols="auto"><v-btn :to="{name:'Popular'}" text>Popular Authors</v-btn></v-col>
       </v-row>
     </v-app-bar>
-    <v-content>
+    <v-main>
       <section>
         <v-parallax :src="imageLink.main" height="600">
           <v-layout column align-center justify-center class="white--text">
@@ -118,10 +118,10 @@
 
                 <v-card-text>
                   <v-flex xs12 v-if="!subscribed">
-                    <v-text-field box label="Email address" :rules="emailRules" v-model="email" hint="Enter your email!" persistent-hint></v-text-field>
+                    <v-text-field filled label="Email address" :rules="emailRules" v-model="email" hint="Enter your email!" persistent-hint></v-text-field>
                   </v-flex>
                   <v-flex xs12 v-if="!subscribed">
-                    <v-text-field box multi-line label="Bio and curiosities"></v-text-field>
+                    <v-text-field filled multi-line label="Bio and curiosities"></v-text-field>
                   </v-flex>
                   <v-flex xs12 class="text-xs-center" v-if="!subscribed">
                     <v-btn class="blue lighten-2 mb-5" dark large @click="subscribe">Get in touch</v-btn>
@@ -202,7 +202,7 @@
         Miller Made It!
       </v-footer>
 
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
@@ -240,18 +240,6 @@ export default {
       this.subscribed = !this.subscribed;
     }
   },
-
-  computed: {
-    imgHeight: function() {
-      var offset = 320;
-      console.log("new image height is " + (this.pageHeight - offset));
-      return this.pageHeight - offset;
-    }
-  },
-
-  mounted: function() {
-    this.calculateHeight();
-  }
 };
 </script>
 

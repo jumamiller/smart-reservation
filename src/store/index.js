@@ -18,9 +18,9 @@ export default new Vuex.Store({
     gitGetter: (state) => (setup) => state[setup],
   },
   actions: {
-    devArticles: ({commit}) => {
+    devArticles: ({commit}, ) => {
       axios
-          .get(`${API_BASE_URL}articles`)
+          .get(`${API_BASE_URL}articles?per_page=500`, {})
           .then((response)=>{
             commit("MUTATE", {
               state: "articles",

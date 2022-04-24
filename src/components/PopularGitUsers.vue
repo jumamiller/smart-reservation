@@ -8,9 +8,8 @@
         <v-data-table
             :headers="headers"
             :items="articles"
-            item-key="name"
-            class="elevation-1"
             :search="search"
+            :items-per-page="10"
         >
           <template v-slot:top>
             <v-text-field
@@ -41,16 +40,19 @@
           </template>
         </v-data-table>
       </v-card-text>
+      <Spinner v-if="articles.length===0"/>
     </v-card>
   </v-container>
 </template>
 
 <script>
 import mixins from "../mixins";
+import Spinner from "@/plugins/loader/views/Spinner";
 
 export default {
   name: "PopularGitUsers",
   mixins: [mixins],
+  components: {Spinner},
   beforeRouteEnter (to, from, next){
     next((vm) => {
       vm.$store.dispatch("devArticles")
@@ -89,14 +91,6 @@ export default {
     articles(){
       return this.$store.getters['gitGetter']('articles')
     }
-  },
-  methods: {
-    filterOnlyCapsText (value, search) {
-      return value != null &&
-          search != null &&
-          typeof value === 'string' &&
-          value.toString().toLocaleUpperCase().indexOf(search) !== -1
-    },
   },
 }
 </script>
