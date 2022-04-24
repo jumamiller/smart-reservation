@@ -1,15 +1,5 @@
 <template>
-  <v-app light class="main-app">
-    <v-app-bar class="white">
-      <img src="../assets/logo.png" alt="Vuetify.js">
-      <v-spacer></v-spacer>
-      <v-row class="">
-        <v-col cols="auto"> <v-btn :to="{name:'Popular'}" text>Match Articles</v-btn></v-col>
-        <v-col cols="auto"> <v-btn :to="{name:'Popular'}" text>About us</v-btn></v-col>
-        <v-col cols="auto"><v-btn :to="{name:'Popular'}" text>Blog</v-btn></v-col>
-        <v-col cols="auto"><v-btn :to="{name:'Popular'}" text>Popular Authors</v-btn></v-col>
-      </v-row>
-    </v-app-bar>
+  <v-app class="main-app">
     <v-main>
       <section>
         <v-parallax :src="imageLink.main" height="600">

@@ -6,11 +6,11 @@ export default {
             return moment(date).format("Do dddd, MMM YYYY hh:mm:ss a");
         },
         getDateTimeFormat(date) {
-            return moment(date).format("Do ddd, hh:mm:ss a");
+            return moment(date).format("Do ddd, MMM YYYY, hh:mm:ss a");
         },
 
         getDateFormat(date) {
-            return moment(date).format("Do ddd, MMM YYYY");
+            return moment(date).format("Do ddd, hh:mm:ss a");
         },
 
         getTimeFormat(time) {

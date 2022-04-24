@@ -2,7 +2,11 @@
   <v-container fluid class="main-app">
     <v-card flat class="mx-auto">
       <v-card-title>
-        <h3>Articles Database | Search To Match</h3>
+        <h3 v-if="articles">Search Articles From {{author.name}}</h3>
+        <v-spacer/>
+        <v-avatar size="50">
+          <v-img :src="author.profile_image"></v-img>
+        </v-avatar>
       </v-card-title>
       <v-card-text>
         <v-data-table
@@ -24,22 +28,23 @@
           <template v-slot:item.id="{index}">
             <span class="items">{{index+1}}</span>
           </template>
+          <template v-slot:item.tag_list="{item}">
+            <span class="ma-1 pa-1 items" v-bind:key="tag" v-for="tag in item.tag_list"><v-icon size="10">mdi-check</v-icon> {{tag}}</span>
+          </template>
           <template v-slot:item.created_at="{item}">
             <span class="items">{{getDateTimeFormat(item.created_at) }}</span>
           </template>
           <template v-slot:item.user="{item}">
-            <router-link class="text-decoration-none" :to="{name: 'AuthorArticles', params: { username:item.user.username}}">
-              <v-avatar size="30">
-                <v-img :src="item.user.profile_image"></v-img>
-              </v-avatar>
-              <span class="items"> {{item.user.name}}</span>
-            </router-link>
+            <v-avatar size="30">
+              <v-img :src="item.user.profile_image"></v-img>
+            </v-avatar>
+            <span class="items"> {{item.user.name}}</span>
           </template>
           <template v-slot:item.title="{item}">
             <v-avatar size="30">
               <v-img :src="item.cover_image"></v-img>
             </v-avatar>
-            <a class="text-decoration-none items" :href="item.url" target="_blank"> {{ item.title }}</a>
+            <a class="text-decoration-none items" style="" :href="item.url" target="_blank"> {{ item.title }}</a>
           </template>
           <template v-slot:item.description="{item}">
             <a class="text-decoration-none items" style="color:#000000" :href="item.url" target="_blank"> {{ item.description }}</a>
@@ -56,12 +61,12 @@ import mixins from "../mixins";
 import Spinner from "@/plugins/loader/views/Spinner";
 
 export default {
-  name: "PopularGitUsers",
+  name: "AuthorArticles",
   mixins: [mixins],
   components: {Spinner},
   beforeRouteEnter (to, from, next){
     next((vm) => {
-      vm.$store.dispatch("devArticles")
+      vm.$store.dispatch("devAuthorArticles", {payload: to.params.username})
     })
   },
   data: () => ({
@@ -70,41 +75,44 @@ export default {
       {
         text: "S/N",
         align: "left",
-        sortable: false,
+        sortable: true,
         value: "id",
       },
       {
         text: "Posted On",
         align: "left",
-        sortable: false,
+        sortable: true,
         value: "created_at",
         width: '270px'
       },
       {
-        text: "Author",
+        text: "Tags",
         align: "left",
-        sortable: false,
-        value: "user",
-        width: '200px'
+        sortable: true,
+        value: "tag_list",
+        width: '300px'
       },
       {
         text: "Title",
         align: "left",
-        sortable: false,
+        sortable: true,
         value: "title",
         width: '500px'
       },
       {
         text: "Description",
         align: "left",
-        sortable: false,
+        sortable: true,
         value: "description"
       },
     ],
   }),
   computed: {
     articles(){
-      return this.$store.getters['gitGetter']('articles')
+      return this.$store.getters['gitGetter']('authorArticles')
+    },
+    author(){
+      return this.articles[0]['user']
     }
   },
 }
