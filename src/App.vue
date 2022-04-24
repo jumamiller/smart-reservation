@@ -15,6 +15,7 @@
         <v-spacer></v-spacer>
         <v-row class="">
           <v-col cols="auto"> <v-btn :to="{name:'Popular'}" text>Match Articles</v-btn></v-col>
+          <v-col cols="auto"> <v-btn :to="{name:'EngEd'}" text>Section PRs &amp; Issues</v-btn></v-col>
           <v-col cols="auto"> <v-btn :to="{name:'AboutUs'}" text>About us</v-btn></v-col>
           <v-col cols="auto"><v-btn :to="{name:'Blog'}" text>Blog</v-btn></v-col>
           <v-col cols="auto"><v-btn :to="{name:'Authors'}" text>Popular Authors</v-btn></v-col>

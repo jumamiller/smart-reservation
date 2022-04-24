@@ -5,6 +5,7 @@ import HomeComponent from "@/components/HomeComponent";
 import AuthorArticles from "@/components/AuthorArticles";
 import Blog from "@/components/Blog";
 import AboutUs from "@/components/AboutUs";
+import SectionPullRequests from "@/components/SectionPullRequests";
 
 Vue.use(VueRouter);
 
@@ -18,6 +19,11 @@ const routes = [
     path: "/articles",
     name: "Popular",
     component: PopularGitUsers,
+  },
+  {
+    path: "/issues",
+    name: "EngEd",
+    component: SectionPullRequests,
   },
   {
     path: '/author-articles/:username',
